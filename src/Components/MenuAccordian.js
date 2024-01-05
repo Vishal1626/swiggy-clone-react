@@ -21,7 +21,7 @@ const MenuAccordian = ({ menu, showItem, setResShowHide }) => {
           <span className="px-4">🔽</span>
         )}
       </div>
-      {showItem && <AccordianMenuList items={menu.itemCards} />}
+      {showItem && <AccordianMenuList items={menu.itemCards} addBtn={true} />}
     </div>
   );
 };

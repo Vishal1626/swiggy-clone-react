@@ -9,6 +9,8 @@ import ResMenu from "./Components/ResMenu";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import userContext from "./utils/userContext";
 import { Provider } from "react-redux";
+import userStore from "./utils/userStore";
+import CartData from "./Components/CartData";
 
 const Instamart = lazy(() => import("./Components/Instamart"));
 
@@ -23,10 +25,12 @@ const App = () => {
   }, []);
 
   return (
-    <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <Header />
-      <Outlet />
-    </userContext.Provider>
+    <Provider store={userStore}>
+      <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <Header />
+        <Outlet />
+      </userContext.Provider>
+    </Provider>
   );
 };
 
@@ -47,6 +51,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/resmenu/:resId",
         element: <ResMenu />,
+      },
+      {
+        path: "/cart",
+        element: <CartData />,
       },
       {
         path: "/instamart",

@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [LoginBtn, setLoginBtn] = useState("Login");
 
   const { loggedInUser } = useContext(userContext);
+  const cart = useSelector((store) => store.cart.items);
+
   return (
     <div className="flex justify-between border border-solid bg-slate-200 shadow-lg pr-2 ">
       <div className="">
@@ -37,8 +40,8 @@ const Header = () => {
             </Link>
           </li>
           <li className="px-2 font-bold">
-            <Link className="contact" to="">
-              Cart
+            <Link className="contact" to="/cart">
+              Cart - {cart.length}
             </Link>
           </li>
           <button

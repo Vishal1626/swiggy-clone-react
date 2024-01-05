@@ -1,7 +1,15 @@
-const AccordianMenuList = ({ items }) => {
+import { useDispatch } from "react-redux";
+import { addToCart } from "../utils/cartSlice";
+
+const AccordianMenuList = ({ items, addBtn }) => {
   const CDN_URL =
     "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
-  console.log(items);
+
+  const dispatch = useDispatch();
+  const handleAddClick = (item) => {
+    dispatch(addToCart(item));
+  };
+
   return (
     <div>
       {items.map((item) => (
@@ -37,9 +45,14 @@ const AccordianMenuList = ({ items }) => {
               className="w-28 rounded-lg border border-gray-300"
               src={CDN_URL + item.card.info.imageId}
             />
-            <button className=" ml-6 mt-16 p-2 absolute text-green-500 font-bold border border-gray-700 bg-white rounded-lg ">
-              ADD +
-            </button>
+            {addBtn && (
+              <button
+                className=" ml-6 mt-16 p-2 absolute text-green-500 font-bold border border-gray-700 bg-white rounded-lg "
+                onClick={() => handleAddClick(item)}
+              >
+                ADD +
+              </button>
+            )}
           </div>
         </div>
       ))}
